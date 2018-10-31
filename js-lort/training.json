@@ -1,0 +1,10 @@
+// JSON Document
+
+{
+	"workout": {
+		"-LPgdefault": {
+			"kg": "8",
+			"reps": "10"
+		}
+	}
+}
