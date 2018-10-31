@@ -2,13 +2,22 @@
 /* CSS Document */
 
 .jumbotron-fluid {
-	margin-bottom: 0;
+	margin-bottom: 0!important;
 }
 
 h4 {
 	text-align: center;
+	margin-top: 2rem;
 }
 
-.row {
+.overview {
 	padding-top: 2rem;
+}
+
+.workoutimg {
+	text-align: center;
+}
+
+.workouttitle {
+	margin-bottom: 0.2rem;
 }
