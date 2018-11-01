@@ -1,0 +1,184 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+.btn.btn-light:active{
+	border-color: #3ba6f7!important;
+
+}
+
+.btn.btn-light:hover{
+	border-color: #3ba6f7!important;
+
+}
+
+.knapper{
+	margin-left: 25%;
+}
+.btn.btn-light{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 60px;
+	padding-right: 60px;
+	font-size: 50px;
+	
+}
+
+.jumbotron.vertical-center2{
+	margin-top: 0px!important;
+	height: 350px !important;
+	background-color: #f8f8f8 !important;
+	margin-left: 5% !important;
+	margin-right: 5% !important;
+}
+
+.pulltext{
+	margin-top: -35px;
+	font-size: 30px;
+}
+.jumbotron.vertical-center{
+	margin-top: 300px!important;
+	height: 280px !important;
+	background-color: #f8f8f8 !important;
+	margin-left: 5% !important;
+	margin-right: 5% !important;
+}
+.pullups:hover{
+	color: #3ba6f7;
+	text-decoration: none;
+}
+.pullups{
+	color: black;
+}
+.text8{
+	
+	font-size: 35px!important;
+	margin-top: -110px;
+	margin-left: 225px;
+}
+.img-fluid2{
+	margin-top: -63px;
+	margin-left: -30px;
+}
+.jumbotron.jumbotron-fluid4{
+	height: 150px;
+	background-color: white !important;
+}
+
+.text7{
+	font-size: 35px !important;
+	color: #3ba6f7;
+}
+
+.col-sm1{
+	margin-top: 50px;
+}
+.text5{
+	font-size: 30px !important;
+	color: #3ba6f7;
+}
+
+.text4{
+	font-size: 30px !important;
+}
+
+.text3{
+	font-size: 35px !important;
+	font-weight: bold;
+}
+
+.text2{
+	font-size: 25px !important;	
+}
+
+.text1{
+	font-size: 35px !important;
+	margin-top: 15px !important;
+
+	
+}
+.images{
+	margin-left: -50px !important;
+}
+
+hr{
+	background-color: #f8f8f8 !important;
+}
+
+.fsk{
+	margin-top: -50px !important; 
+}
+h4.ng{
+	font-size: 40px;
+	text-align: center;
+	font-weight: normal !important;
+	
+	
+}
+.jumbotron-fluid2 {
+	height: 200px;
+	background-color: white; 
+	border-style: solid !important;
+    border-width: 5px !important;
+	border: #3ba6f7 ;
+	
+}
+
+
+h5{
+text-align: center;
+	font-size: 30px!important;
+
+
+}  
+h4{
+	font-size: 40px;
+	font-weight: bold;
+	text-align: center;
+	margin-top: 2rem;
+}
+
+.jumbotron-fluid {
+	height: 400px;
+	margin-bottom: 0!important;
+	background-color: #FFFFFF;
+}
+
+.nav.nav-tabs.nav-fill{
+	height: 7,5rem!important;
+	background-color: #f8f8f8;
+}
+
+.nav-link{
+	padding-top: 50px;
+	padding-bottom: 50px;
+	font-size: 35px !important;
+	color: black;
+	
+}
+.nav-link:hover{
+	padding-top: 50px;
+	padding-bottom: 50px;
+	font-size: 35px !important;
+	color: aliceblue;
+	background-color: #3ba6f7 !important; 
+}
+.nav-link.active{
+	background-color: #3ba6f7 !important;
+	color: aliceblue !important;
+	font-size: 35px !important;
+	
+}
+
+
+.overview {
+	padding-top: 2rem;
+}
+
+.workoutimg {
+	text-align: center;
+}
+
+.workouttitle {
+	margin-bottom: 0.2rem;
+}

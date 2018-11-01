@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>From test lort</title>
+		<script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
+		<script>
+		  // Initialize Firebase
+		  var config = {
+			apiKey: "AIzaSyA9FlW7BwBsVNlZN9MCFnPMRjlE3-Jfr7c",
+			authDomain: "strongyou-8a9e7.firebaseapp.com",
+			databaseURL: "https://strongyou-8a9e7.firebaseio.com",
+			projectId: "strongyou-8a9e7",
+			storageBucket: "",
+			messagingSenderId: "982338268815"
+		  };
+		  firebase.initializeApp(config);
+		</script>
+	</head>
+
+	<body>
+		<h2>Your workout</h2>
+		<form>
+			<input id="kg" type="number" class="kg" placeholder="Your weight...">
+			<input id="reps" type="number" class="reps" placeholder="Your reps...">
+			<select id="set">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>				
+			</select>
+			<div id="output">
+				
+			</div>
+			<button type="submit" id="submit">Submit sets</button>
+		</form>
+		
+		<script>
+			var database = firebase.database();
+			var submitButton = document.getElementById('submit');
+			submitButton.addEventListener('click', addSets);
+			// read from database
+			database.ref('workout/').once('value', function(snapshot){
+				snapshot.forEach(function (childSnap){
+					
+					let allKg = childSnap.child('kg').val();
+					
+					let allReps = childSnap.child('reps').val();
+					
+					console.log(allKg);
+					console.log(allReps);
+					
+					document.getElementById('kg').setAttribute('value' , allKg );
+					document.getElementById('reps').setAttribute('value' , allReps);
+					
+				});
+			});
+			
+			
+			
+			//Set amount action
+			var sessionNumber = document.getElementById('set');
+			sessionNumber.addEventListener('change', createSets);
+			
+			function createSets() {
+				var setList = document.getElementById('set');
+				var setAmount = setList.options[setList.selectedIndex].value;
+				
+				if (setAmount == 1) {
+					document.getElementById('output').innerHTML = '';
+				} else if (setAmount == 2){
+					document.getElementById('output').innerHTML = '<input type="number" class="kg" placeholder="Your weight..."><input type="number" class="reps" placeholder="Your reps...">';
+				} else if (setAmount == 3) {
+					document.getElementById('output').innerHTML = '<input type="number" class="kg" placeholder="Your weight..."><input type="number" class="reps" placeholder="Your reps..."><br><input type="number" class="kg" placeholder="Your weight..."><input type="number" class="reps" placeholder="Your reps...">';
+				}
+			}
+			
+			//Set bliver sat i databasen
+			function addSets(){
+				var kg = document.getElementsByClassName('kg');
+				var reps = document.getElementsByClassName('reps');
+				for (i = 0; i < kg.length; i++) {
+					
+					var kgVal = document.getElementsByClassName('kg').value;
+					var repsVal = document.getElementsByClassName('reps').value;
+					
+					var setData = {
+						"kg" : kgVal,
+						"reps" : repsVal
+					};
+					var newSet = database.ref('workout/').push().key;
+					database.ref('workout/' + newSet).update(setData);
+				};
+			};
+		</script>
+	</body>
+</html>
