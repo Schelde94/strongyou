@@ -6,6 +6,20 @@
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		<link rel="stylesheet" href="style.css">
+		<!-- firebase -->
+		<script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
+		<script>
+		  // Initialize Firebase
+		  var config = {
+			apiKey: "AIzaSyA9FlW7BwBsVNlZN9MCFnPMRjlE3-Jfr7c",
+			authDomain: "strongyou-8a9e7.firebaseapp.com",
+			databaseURL: "https://strongyou-8a9e7.firebaseio.com",
+			projectId: "strongyou-8a9e7",
+			storageBucket: "",
+			messagingSenderId: "982338268815"
+		  };
+		  firebase.initializeApp(config);
+		</script>		
 	</head>
 
 	<body>
@@ -20,15 +34,124 @@
 		</div>
 		<div class="jumbotron vertical-center">
 			<p class="pulltext">1. Sit down. <br>2. Hold the kettlebell by its handle with both hands.<br>3. Move the Kettlebell from left to right over your hip.<br>4. Make sure to move the kettlebell with control.<br>5. Feet are either on the ground or elevated in the air.</p>
-			
 			</div>
+		
+		<!-- Form workout input -->
 		<div class="jumbotron vertical-center2">
-			
-			
-			</div><div class="knapper">
-			<a href="session.html"><button type="button" class="btn btn-light" >Back</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<button type="button" class="btn btn-light">Next</button>
+			<form id="setinput">
+				<div class="row">
+					<div class="col-sm">
+						<label for="kg">Your weight:</label>
+						<input id="kg" type="number" class="form-control" name="kg" placeholder="Weight..." required>
+					</div>
+					<div class="col-sm">
+						<label for="reps">Your repetitions:</label>
+						<input id="reps" type="number" class="form-control" name="reps" placeholder="Reps..." required>
+					</div>
+					<div class="col-sm-2">
+						<label for="set">Your sets:</label>
+						<select class="form-control" id="set">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>				
+						</select>	
+					</div>
+				</div>
+				<div id="output">
+					<div class="row">
+					
+					</div>
+				</div>
+			</form>	
 		</div>
+		
+		
+		<div class="knapper">
+			<a href="session.html"><button type="button" class="btn btn-light" >Back</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="submit" id="submit" form="setinput" class="btn btn-light">Next</button>
+		</div>
+		
+		<!-- Form script -->
+		<script>
+			var database = firebase.database();
+			var submitButton = document.getElementById('submit');
+			
+			
+			
+			
+			submitButton.addEventListener('click', addSets);
+			// read from database
+			database.ref('workout/').once('value', function(snapshot){
+				snapshot.forEach(function (childSnap){
+					
+					let allKg = childSnap.child('kg').val();
+					
+					let allReps = childSnap.child('reps').val();
+					
+					console.log(allKg);
+					console.log(allReps);
+					
+					document.getElementById('kg').setAttribute('value' , allKg );
+					document.getElementById('reps').setAttribute('value' , allReps);
+					
+					
+				});
+			});
+			
+			/*<div class="col-sm">
+						<input type="number" class="form-control" name="kg" placeholder="Weight..." required>
+					</div>
+					<div class="col-sm">
+						<input type="number" class="form-control" name="reps" placeholder="Reps..." required>
+					</div>
+					<div class="col-sm-2">
+					</div>*/
+			
+			
+			//Set amount action
+			var sessionNumber = document.getElementById('set');
+			sessionNumber.addEventListener('change', createSets);
+			
+			function createSets() {
+				var setList = document.getElementById('set');
+				var setAmount = setList.options[setList.selectedIndex].value;
+				var inputLine = '<div class="row"><div class="col-sm"><input type="number" class="form-control" name="kg" placeholder="Weight..." required></div><div class="col-sm"><input type="number" class="form-control" name="reps" placeholder="Reps..." required></div><div class="col-sm-2"></div></div>';
+				
+				if (setAmount == 1) {
+					document.getElementById('output').innerHTML = '';
+				} else if (setAmount == 2){
+					document.getElementById('output').innerHTML = inputLine;
+				} else if (setAmount == 3) {
+					document.getElementById('output').innerHTML = inputLine.repeat(2);
+				}
+			}
+			
+		
+			//Set bliver sat i databasen
+			function addSets(){
+				var kg = document.getElementsByName('kg');
+				var reps = document.getElementsByName('reps');
+				for (i = 0; i < kg.length; i++) {
+					var kgVal = kg[i].value;
+					var repsVal = reps[i].value;
+					
+					var setData = {
+						"kg" : kgVal,
+						"reps" : repsVal
+					};
+					
+					var newSet = database.ref('workout/').push().key;
+					database.ref('workout/' + newSet).update(setData);
+					
+				};
+			};
+
+			
+			
+			//document.getElementsByClassName('kg').value;
+			//document.getElementsByClassName('reps').value;
+		</script>
+		
 		<!-- Bootstrap -->
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
